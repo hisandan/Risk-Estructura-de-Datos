@@ -4,11 +4,13 @@
 #include <string>
 #include <vector>
 
-struct Pais {
+class Pais {
+public:
     std::string nombre;
     std::string continente;
     std::string dueno;
     std::string npaises;
+    std::vector<std::string> adyacentes; // nombre de paises adyacentes
     int tropas;
     
 };

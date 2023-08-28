@@ -1,3 +1,7 @@
+// este archivo incluye mayor verificación de entradas de cantidad de palabras en la lista de comandos
+// revisar para integrarlo luego con el main
+
+
 #include <iostream>
 #include <vector>
 #include <string>

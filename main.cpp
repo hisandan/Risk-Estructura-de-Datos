@@ -3,32 +3,29 @@
 #include <map>
 #include <sstream>
 #include <vector>
-#include "clases/jugador.h"
-#include "clases/pais.h"
-#include "clases/tablero.h"
+#include "clases/Jugador.h"
+#include "clases/Pais.h"
+#include "clases/Tablero.h"
 
 
 // Function prototypes
-void DisplayHelp(const std::map<std::string, std::string>& commandHelp);
+// void DisplayHelp(const std::map<std::string, std::string>& commandHelp);
+void ayuda();
 void InitializeGame(); 
 void Turno(const std::string& JugadorId);
 void Save(const std::string& filename);
 void Load(const std::string& filename);
 
-;
-
-
+// Global variables
 
 std::vector<Jugador> jugadores;
 std::vector<Pais> paises;
-
-
 void crear_paises();
 
-void ayuda();
 
 int main() {
-    
+    cout << "Bienvenido a RISK" << std::endl;
+    ayuda();
     
     //comandos para interactuar con el programa
     // std::map<std::string, std::string> commandHelp;
@@ -51,10 +48,10 @@ int main() {
         if (cmd == "ayuda") {
             ayuda();
         } else if (cmd == "inicializar") {
-            InitializeGame();
             crear_paises();
+            InitializeGame();
             Tablero tablero(jugadores, paises);
-            
+
         } else if (cmd == "turno") {
             std::string JugadorId;
             iss >> JugadorId;
@@ -404,10 +401,7 @@ void InitializeGame() {
 
         }
 
-       
-
-    
-    }
+        }
   
         // se reparten los paises entre los jugadores
        for (int j = 0; j < paises.size(); j++){ 
@@ -424,7 +418,10 @@ void InitializeGame() {
             if (paises[i].dueno == "vacio")
             {
                paises[i].dueno= jugadores[j%numjugadores].nombre;
+               paises[i].tropas = 1;
                jugadores[j%numjugadores].tropas = jugadores[j%numjugadores].tropas - 1;
+               jugadores[j%numjugadores].paisesj.push_back(paises[i]);
+
             }
             else if (paises[i].dueno != x)
             {
@@ -449,6 +446,7 @@ void InitializeGame() {
 
 
 void Turno(const std::string& JugadorId) {
+
     
 }
 
