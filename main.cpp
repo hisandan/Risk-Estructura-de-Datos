@@ -21,6 +21,8 @@ void Load(const std::string& filename);
 std::vector<Jugador> jugadores;
 std::vector<Pais> paises;
 void crear_paises();
+crear_paises();
+Tablero tablero;
 
 
 int main() {
@@ -48,9 +50,9 @@ int main() {
         if (cmd == "ayuda") {
             ayuda();
         } else if (cmd == "inicializar") {
-            crear_paises();
+            
             InitializeGame();
-            Tablero tablero(jugadores, paises);
+            
 
         } else if (cmd == "turno") {
             std::string JugadorId;
@@ -402,7 +404,7 @@ void InitializeGame() {
         }
 
         }
-  
+
         // se reparten los paises entre los jugadores
        for (int j = 0; j < paises.size(); j++){ 
         std::cout << jugadores[j%numjugadores].nombre<<" Seleccione el pais donde quiere poner tropas:"  << std::endl;
@@ -435,7 +437,8 @@ void InitializeGame() {
                 j--;
             }
              
-                
+            tablero.jugadores = jugadores;
+            tablero.paises = paises;
         
        
        }
@@ -446,8 +449,13 @@ void InitializeGame() {
 
 
 void Turno(const std::string& JugadorId) {
+    // verificar que turno si corresponde
+    if (tablero.turnoActual != JugadorId) {
+        std::cout << "No es el turno de este jugador" << std::endl;
+        return;
+    }
 
-    
+    tablero.empezar_turno()  
 }
 
 void Save(const std::string& filename) {
