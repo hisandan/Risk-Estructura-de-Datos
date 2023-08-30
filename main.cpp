@@ -419,15 +419,12 @@ void InitializeGame() {
         // encuentra la posicion del nombre del pais
             int i=0;
             bool encontrado = false;
-            while (!encontrado ||  i <= tablero.paises.size()){
-
-                if (tablero.paises[i].nombre == x) {
+            for (int z = 0; !encontrado && z < tablero.paises.size(); z++) {
+                if (tablero.paises[z].nombre == x) {
+                    i = z;
                     encontrado = true; // Se encontró el país
-                    break; // Sal del bucle while
-                }else{
-                    i++;
                 }
-            };
+            }
 
             
             if (!encontrado) {
@@ -441,6 +438,13 @@ void InitializeGame() {
                tablero.paises[i].tropas = 1;
                tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
                tablero.jugadores[j%numjugadores].paisesj.push_back(tablero.paises[i]);
+
+            }
+            else if (tablero.paises[i].dueno ==tablero.jugadores[j%numjugadores].nombre){
+                tablero.paises[i].tropas = tablero.paises[i].tropas + 1;
+                tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
+                std::cout<<"tropas añadidas!"<<std::endl;
+
 
             }
             else{
