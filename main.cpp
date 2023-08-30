@@ -10,22 +10,23 @@
 
 // Function prototypes
 // void DisplayHelp(const std::map<std::string, std::string>& commandHelp);
-void ayuda();
 void InitializeGame(); 
+void ayuda();
 void Turno(const std::string& JugadorId);
 void Save(const std::string& filename);
 void Load(const std::string& filename);
 
 // Global variables
 
-std::vector<Jugador> jugadores;
-std::vector<Pais> paises;
+// std::vector<Jugador> jugadores;
+// std::vector<Pais> paises;
 void crear_paises();
-crear_paises();
+
 Tablero tablero;
 
 
 int main() {
+    crear_paises();
     cout << "Bienvenido a RISK" << std::endl;
     ayuda();
     
@@ -141,217 +142,217 @@ void crear_paises(){
     pais.nombre = "Alaska";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Alberta";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = " America Central";
     pais.continente = "America del norte";
    pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Estados Unidos Orientales";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Groenlandia";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Territorio Noroccidental";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Ontario";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Quebec";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
     
     pais.nombre = "Estados Unidos Occidentales";
     pais.continente = "America del norte";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     //sur america
     pais.nombre = "Argentina";
     pais.continente = "America del Sur";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Brasil";
     pais.continente = "America del Sur";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Peru";
     pais.continente = "America del Sur";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
     
     pais.nombre = "Venezuela";
     pais.continente = "America del Sur";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
     
     //Australia
     pais.nombre = "Australia Oriental";
     pais.continente = "Australia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Indonesia";
     pais.continente = "Australia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Nueva Guinea";
     pais.continente = "Australia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Australia Occidental";
     pais.continente = "Australia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
     
     //Europa
     pais.nombre = "Gran Bretaña";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
    
     pais.nombre = "Islandia";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Europa del Norte";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Escandinavia";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Europa del Sur";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Ucrania";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
    
     pais.nombre = "Europa Occidental";
     pais.continente = "Europa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
    
     //Asia
     pais.nombre = "Afghanistan";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "China";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "India";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Irkutsk";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Japon";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Kamchatka";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Medio Oriente";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Mongolia";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Siam";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Siberia";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Ural";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Yakutsk";
     pais.continente = "Asia";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     //Africa
     pais.nombre = "Congo";
     pais.continente = "Africa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Africa Oriental";
     pais.continente = "Africa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Egipto";
     pais.continente = "Africa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Madagascar";
     pais.continente = "Africa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Africa del Norte";
     pais.continente = "Africa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 
     pais.nombre = "Africa del Sur";
     pais.continente = "Africa";
     pais.dueno="vacio";
-    paises.push_back(pais);
+    tablero.paises.push_back(pais);
 };
 
 
@@ -379,35 +380,35 @@ void InitializeGame() {
         if (numjugadores == 3)
         {
             Jugador.tropas = 35; // Numero de tropas iniciales
-            jugadores.push_back(Jugador);
+            tablero.jugadores.push_back(Jugador);
 
         }
         else if (numjugadores == 4)
         {
             Jugador.tropas = 30; // Numero de tropas iniciales
-            jugadores.push_back(Jugador);
+            tablero.jugadores.push_back(Jugador);
 
         }
         
         else if (numjugadores == 5)
         {
             Jugador.tropas = 25; // Numero de tropas iniciales
-            jugadores.push_back(Jugador);
+            tablero.jugadores.push_back(Jugador);
 
         }
 
         else if (numjugadores == 6)
         {
             Jugador.tropas = 20; // Numero de tropas iniciales
-            jugadores.push_back(Jugador);
+            tablero.jugadores.push_back(Jugador);
 
         }
 
         }
 
         // se reparten los paises entre los jugadores
-       for (int j = 0; j < paises.size(); j++){ 
-        std::cout << jugadores[j%numjugadores].nombre<<" Seleccione el pais donde quiere poner tropas:"  << std::endl;
+       for (int j = 0; j < tablero.paises.size(); j++){ 
+        std::cout << tablero.jugadores[j%numjugadores].nombre<<" Seleccione el pais donde quiere poner tropas:"  << std::endl;
         
         std::string x;
         std::cin>>x;
@@ -415,17 +416,15 @@ void InitializeGame() {
             do
             {
                 i++;
-            } while (paises[i].nombre== x );
-
-            if (paises[i].dueno == "vacio")
+            if (tablero.paises[i].dueno == "vacio")
             {
-               paises[i].dueno= jugadores[j%numjugadores].nombre;
-               paises[i].tropas = 1;
-               jugadores[j%numjugadores].tropas = jugadores[j%numjugadores].tropas - 1;
-               jugadores[j%numjugadores].paisesj.push_back(paises[i]);
+               tablero.paises[i].dueno= tablero.jugadores[j%numjugadores].nombre;
+               tablero.paises[i].tropas = 1;
+               tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
+               tablero.jugadores[j%numjugadores].paisesj.push_back(tablero.paises[i]);
 
             }
-            else if (paises[i].dueno != x)
+            else if (tablero.paises[i].dueno != x)
             {
                 std::cout<<"No se encontro el pais, verifique si tiene errores de ortografia"<<std::endl;
                 j--;
@@ -436,9 +435,11 @@ void InitializeGame() {
 
                 j--;
             }
+            } while (tablero.paises[i].nombre== x );
+
              
-            tablero.jugadores = jugadores;
-            tablero.paises = paises;
+            // tablero.jugadores = jugadores;
+            // tablero.paises = paises;
         
        
        }
@@ -448,14 +449,14 @@ void InitializeGame() {
 }
 
 
-void Turno(const std::string& JugadorId) {
+void Turno(int JugadorId) {
     // verificar que turno si corresponde
     if (tablero.turnoActual != JugadorId) {
         std::cout << "No es el turno de este jugador" << std::endl;
         return;
     }
 
-    tablero.empezar_turno()  
+    tablero.empezar_turno();
 }
 
 void Save(const std::string& filename) {

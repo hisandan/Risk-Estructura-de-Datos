@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 #include "Pais.h"
+#include <algorithm> 
+
+using namespace std;
 
 class Jugador {
 public:
@@ -13,7 +16,7 @@ public:
     std::vector<std::string> cartas;
     std::vector<Pais> paisesj;
 
-    mover_tropas(Pais pais1, Pais pais2) {
+    void mover_tropas(Pais pais1, Pais pais2) {
 
         // verificar que el jugador sea dueño de los paises
         if(pais1.dueno != nombre || pais2.dueno != nombre) {
@@ -33,7 +36,7 @@ public:
         }
 
         //verificar que los paises sean adyacentes
-        if(!pais1.adyacentes.contains(pais2.nombre)) {
+        if (std::find(pais1.adyacentes.begin(), pais1.adyacentes.end(), pais2.nombre) == pais1.adyacentes.end()) {
             cout << "Los paises no son adyacentes" << endl;
             return;
         }

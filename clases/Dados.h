@@ -10,7 +10,7 @@ public:
     std::vector<int> dados; // cada dado es un int
 
 
-    Dados(std::string color, std::vector<int> dados) : color(color), dados(dados) {}
+    Dados(std::string tipo, std::vector<int> dados) : tipo(tipo), dados(dados) {}
 
     void tirarDados() {
         for (int i = 0; i < dados.size(); i++) {

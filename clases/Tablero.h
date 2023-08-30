@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Dados.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ public:
     int turnoActual = 0;
     
 
-
+    Tablero() {}
     Tablero(std::vector<Jugador> jugadores, std::vector<Pais> paises) : jugadores(jugadores), paises(paises) {}
 
     void empezar_turno() {
@@ -95,6 +96,8 @@ public:
 
        
        // DEFINIENDO CON CUANTOS DADOS ATACAR Y DEFENDER-------
+       int cantidad_dados_atacante;
+       int cantidad_dados_defensor;
         // Revisar si el atacante tiene mas de 1 tropa
         if(atacante.tropas < 2){
             cout << "No tienes suficientes tropas" << endl;
@@ -104,7 +107,7 @@ public:
         }else{
             cantidad_dados_atacante = 3;
         }
-        int cantidad_dados_atacante = 2;
+         cantidad_dados_atacante = 2;
 
         // Revisar si el defensor tiene mas de 0 tropas
         if(defensor.tropas ==1){
@@ -115,8 +118,11 @@ public:
 
 
         // CREANDO LOS DADOS-------------------------------------
-        Dados dados_atacante("atacante", cantidad_dados_atacante);
-        Dados dados_defensor("defensor", cantidad_dados_defensor);
+
+        std::vector<int> vectorAtacante(cantidad_dados_atacante, 0);
+        std::vector<int> vectorDefensor(cantidad_dados_defensor, 0);
+        Dados dados_atacante("atacante", vectorAtacante);
+        Dados dados_defensor("defensor", vectorDefensor);
         std::pair<int, int> resultado = comparar_dados(dados_atacante, dados_defensor);
         atacante.tropas -= resultado.first;
         defensor.tropas -= resultado.second;
@@ -163,7 +169,7 @@ public:
     }
 
 
-
+    }
 };
 
 
