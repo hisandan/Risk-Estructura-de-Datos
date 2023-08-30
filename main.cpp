@@ -12,7 +12,7 @@
 // void DisplayHelp(const std::map<std::string, std::string>& commandHelp);
 void InitializeGame(); 
 void ayuda();
-void Turno(const std::string& JugadorId);
+void Turno(int JugadorId);
 void Save(const std::string& filename);
 void Load(const std::string& filename);
 
@@ -56,7 +56,7 @@ int main() {
             
 
         } else if (cmd == "turno") {
-            std::string JugadorId;
+            int JugadorId;
             iss >> JugadorId;
             Turno(JugadorId);
         } else if (cmd == "guardar") {
@@ -67,6 +67,9 @@ int main() {
             std::string filename;
             iss >> filename;
             Load(filename);
+        }  else if (cmd == "salir") {
+            std::cout<< "Gracias por jugar"<<endl;
+            return 0;
         } 
         else {
             std::cout << "Comando no válido. Escribe 'ayuda' para obtener la lista de comandos." << std::endl;
