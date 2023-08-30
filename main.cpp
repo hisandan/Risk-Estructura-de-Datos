@@ -414,11 +414,27 @@ void InitializeGame() {
         std::cout << tablero.jugadores[j%numjugadores].nombre<<" Seleccione el pais donde quiere poner tropas:"  << std::endl;
         
         std::string x;
-        std::cin>>x;
+        std::getline(std::cin, x);
+
+        // encuentra la posicion del nombre del pais
             int i=0;
-            do
-            {
-                i++;
+            bool encontrado = false;
+            while (!encontrado ||  i <= tablero.paises.size()){
+
+                if (tablero.paises[i].nombre == x) {
+                    encontrado = true; // Se encontró el país
+                    break; // Sal del bucle while
+                }else{
+                    i++;
+                }
+            };
+
+            
+            if (!encontrado) {
+                std::cout << "No se encontro el pais, verifique si tiene errores de ortografia" << std::endl;
+                continue; // Pasa a la siguiente iteración del bucle for
+            }
+
             if (tablero.paises[i].dueno == "vacio")
             {
                tablero.paises[i].dueno= tablero.jugadores[j%numjugadores].nombre;
@@ -427,18 +443,12 @@ void InitializeGame() {
                tablero.jugadores[j%numjugadores].paisesj.push_back(tablero.paises[i]);
 
             }
-            else if (tablero.paises[i].dueno != x)
-            {
-                std::cout<<"No se encontro el pais, verifique si tiene errores de ortografia"<<std::endl;
-                j--;
-            }
             else{
                 
                 std::cout<<"Ya hay tropas en este pais, seleccione otro"<<std::endl;
 
                 j--;
             }
-            } while (tablero.paises[i].nombre== x );
 
              
             // tablero.jugadores = jugadores;
