@@ -23,6 +23,7 @@ public:
 
     void empezar_turno() {
         distribuir_tropas();
+        
         siguenteturno();
     }
         

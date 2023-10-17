@@ -11,3 +11,15 @@ o incluso la ocupación de todos los territorios del tablero)
 
 
 http://www.hasbro.com/common/instruct/risk.pdf
+
+
+Install the google test library
+```
+sudo apt update
+sudo apt install libgtest-dev -y
+cd /usr/src/gtest && sudo  cmake CMakeLists.txt && sudo make
+sudo cp /usr/src/googletest/googletest/lib/libgtest.a /usr/src/googletest/googletest/lib/lib
+gtest_main.a /usr/lib
+g++ -o test tests.cpp -lgtest -lpthread
+./tests
+```

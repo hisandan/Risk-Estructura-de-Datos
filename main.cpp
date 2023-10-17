@@ -20,9 +20,9 @@ void Load(const std::string& filename);
 
 // std::vector<Jugador> jugadores;
 // std::vector<Pais> paises;
+Tablero tablero;
 void crear_paises();
 
-Tablero tablero;
 
 
 int main() {
@@ -413,18 +413,25 @@ void InitializeGame() {
        for (int j = 0; j < tablero.paises.size(); j++){ 
         std::cout << tablero.jugadores[j%numjugadores].nombre<<" Seleccione el pais donde quiere poner tropas:"  << std::endl;
         
+        // std::string test;
+        // cin >> test; 
         std::string x;
         std::getline(std::cin, x);
 
         // encuentra la posicion del nombre del pais
             int i=0;
             bool encontrado = false;
+            cout << x << endl;
             for (int z = 0; !encontrado && z < tablero.paises.size(); z++) {
+                // std::cout << tablero.paises[z].nombre << endl;
                 if (tablero.paises[z].nombre == x) {
+                    // cout << "...................." << endl;
                     i = z;
                     encontrado = true; // Se encontró el país
                 }
             }
+
+            
 
             
             if (!encontrado) {
