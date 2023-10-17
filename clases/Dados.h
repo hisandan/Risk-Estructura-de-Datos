@@ -9,53 +9,17 @@ public:
     std::string tipo; // atacante o defensor  --> en la vida real son rojos o blancos
     std::vector<int> dados; // cada dado es un int
 
+    Dados(std::string tipo, std::vector<int> dados);
 
-    Dados(std::string tipo, std::vector<int> dados) : tipo(tipo), dados(dados) {}
+    void tirarDados();
 
-    void tirarDados() {
-        for (int i = 0; i < dados.size(); i++) {
-            dados[i] = rand() % 6 + 1;
-        }
-    }
+    void ordenarDados();
 
-    void ordenarDados() {
-        std::sort(dados.begin(), dados.end());
-    }
+    void imprimirDados();
 
-    void imprimirDados() {
-        for (int i = 0; i < dados.size(); i++) {
-            std::cout << dados[i] << " ";
-        }
-        std::cout << std::endl;
-    }
+    int obtenerMayor();
 
-    int obtenerMayor() {
-        int mayor = dados[0];
-        for (int i = 1; i < dados.size(); i++) {
-            if (dados[i] > mayor) {
-                mayor = dados[i];
-            }
-        }
-        return mayor;
-    }
-
-    int obtenerSegundoMayor() {
-        int mayor = obtenerMayor();
-        int segundoMayor = dados[0];
-        for (int i = 1; i < dados.size(); i++) {
-            if (dados[i] > segundoMayor && dados[i] < mayor) {
-                segundoMayor = dados[i];
-            }
-        }
-        return segundoMayor;
-    }
-    
-
-    
-        
+    int obtenerSegundoMayor();
 };
-
-
-
 
 #endif

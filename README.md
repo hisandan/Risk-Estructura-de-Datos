@@ -13,6 +13,12 @@ o incluso la ocupación de todos los territorios del tablero)
 http://www.hasbro.com/common/instruct/risk.pdf
 
 
+# Running App
+```
+sh ejecutar_programa.sh
+```
+
+# Running tests
 Install the google test library
 ```
 sudo apt update

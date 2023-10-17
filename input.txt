@@ -1,0 +1,47 @@
+inicializar
+3
+Daniel
+Juan
+Camilo
+Alaska
+Alberta
+America Central
+Estados Unidos Orientales
+Groenlandia
+Territorio Noroccidental
+Ontario
+Quebec
+Estados Unidos Occidentales
+Argentina
+Brasil
+Peru
+Venezuela
+Australia Oriental
+Indonesia
+Nueva Guinea
+Australia Occidental
+Gran Bretaña
+Islandia
+Europa del Norte
+Escandinavia
+Europa del Sur
+Ucrania
+Europa Occidental
+Afghanistan
+China
+India
+Irkutsk
+Japon
+Kamchatka
+Medio Oriente
+Mongolia
+Siam
+Siberia
+Ural
+Yakutsk
+Congo
+Africa Oriental
+Egipto
+Madagascar
+Africa del Norte
+Africa del Sur

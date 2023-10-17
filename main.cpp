@@ -7,6 +7,7 @@
 #include "clases/Pais.h"
 #include "clases/Tablero.h"
 
+using namespace std; 
 
 // Function prototypes
 // void DisplayHelp(const std::map<std::string, std::string>& commandHelp);
@@ -152,7 +153,7 @@ void crear_paises(){
     pais.dueno="vacio";
     tablero.paises.push_back(pais);
 
-    pais.nombre = " America Central";
+    pais.nombre = "America Central";
     pais.continente = "America del norte";
    pais.dueno="vacio";
     tablero.paises.push_back(pais);
@@ -409,9 +410,10 @@ void InitializeGame() {
 
         }
 
+        cin.ignore();
         // se reparten los paises entre los jugadores
        for (int j = 0; j < tablero.paises.size(); j++){ 
-        std::cout << tablero.jugadores[j%numjugadores].nombre<<" Seleccione el pais donde quiere poner tropas:"  << std::endl;
+        std::cout << tablero.jugadores[j%numjugadores].nombre<<" - Seleccione el pais donde quiere poner tropas:"  << std::endl << "$ ";
         
         // std::string test;
         // cin >> test; 
@@ -435,7 +437,8 @@ void InitializeGame() {
 
             
             if (!encontrado) {
-                std::cout << "No se encontro el pais, verifique si tiene errores de ortografia" << std::endl;
+                std::cout << "... No se encontro el pais, verifique si tiene errores de ortografia" << std::endl;
+                j--;
                 continue; // Pasa a la siguiente iteración del bucle for
             }
 
@@ -445,18 +448,19 @@ void InitializeGame() {
                tablero.paises[i].tropas = 1;
                tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
                tablero.jugadores[j%numjugadores].paisesj.push_back(tablero.paises[i]);
+               std::cout<<"... Pais añadido, tropas añadidas!"<<std::endl;
 
             }
             else if (tablero.paises[i].dueno ==tablero.jugadores[j%numjugadores].nombre){
                 tablero.paises[i].tropas = tablero.paises[i].tropas + 1;
                 tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
-                std::cout<<"tropas añadidas!"<<std::endl;
+                std::cout<<"... Tropas añadidas!"<<std::endl;
 
 
             }
             else{
                 
-                std::cout<<"Ya hay tropas en este pais, seleccione otro"<<std::endl;
+                std::cout<<"... Ya hay tropas en este pais, seleccione otro"<<std::endl;
 
                 j--;
             }
@@ -467,7 +471,7 @@ void InitializeGame() {
         
        
        }
-    
+    ayuda();
     
     
 }
@@ -479,8 +483,8 @@ void Turno(int JugadorId) {
         std::cout << "No es el turno de este jugador" << std::endl;
         return;
     }
-
     tablero.empezar_turno();
+
 }
 
 void Save(const std::string& filename) {

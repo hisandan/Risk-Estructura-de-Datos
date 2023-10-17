@@ -3,10 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <iostream> // Include this for cin and cout
+#include <algorithm>
 #include "Pais.h"
-#include <algorithm> 
-
-using namespace std;
 
 class Jugador {
 public:
@@ -16,39 +15,9 @@ public:
     std::vector<std::string> cartas;
     std::vector<Pais> paisesj;
 
-    void mover_tropas(Pais pais1, Pais pais2) {
+    void mover_tropas(Pais& pais1, Pais& pais2); // Declare the function
 
-        // verificar que el jugador sea dueño de los paises
-        if(pais1.dueno != nombre || pais2.dueno != nombre) {
-            cout << "No es dueño de los paises" << endl;
-            return;
-        }
-
-        // preguntar cuantas tropas desea mover
-        int tropas;
-        cout << "¿Cuantas tropas desea mover?" << endl;
-        cin >> tropas;
-
-        // debe dejar al menos 1 unidad en cada uno de sus países
-        if(pais1.tropas - tropas < 1) {
-            cout << "Debe dejar minimo 1 tropa en el pais "<< pais1.nombre << endl;
-            return;
-        }
-
-        //verificar que los paises sean adyacentes
-        if (std::find(pais1.adyacentes.begin(), pais1.adyacentes.end(), pais2.nombre) == pais1.adyacentes.end()) {
-            cout << "Los paises no son adyacentes" << endl;
-            return;
-        }
-
-        pais1.tropas -= tropas;
-        pais2.tropas += tropas;
-
-    }
-
-
+    // You can add other member functions or variables here if needed
 };
-
-
 
 #endif

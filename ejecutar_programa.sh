@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # Compile the C++ code
-g++ -o game_program main.cpp
+g++ -o game_program clases/*.h clases/*.cpp main.cpp
 
 # Check if compilation was successful
 if [ $? -eq 0 ]; then
     echo "Compilation successful. Starting the game..."
-    ./game_program
+    # input_file="input.txt"
+    ./game_program  
+
+
 else
     echo "Compilation failed. Please check your C++ code."
 fi
