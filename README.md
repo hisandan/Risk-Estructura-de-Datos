@@ -18,7 +18,11 @@ http://www.hasbro.com/common/instruct/risk.pdf
 sh ejecutar_programa.sh
 ```
 
-# Running tests
+# Dummy Data
+Puedes copiar todos los renglones de input.txt y pegarlos en la terminal despues de correr el programa para inicializar algunos valores de prueba.
+
+
+# Running tests (Not developed yet)
 Install the google test library
 ```
 sudo apt update

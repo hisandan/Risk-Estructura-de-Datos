@@ -60,14 +60,17 @@ int main() {
             int JugadorId;
             iss >> JugadorId;
             Turno(JugadorId);
+            ayuda();
         } else if (cmd == "guardar") {
             std::string filename;
             iss >> filename;
             Save(filename);
+            ayuda();
         } else if (cmd == "cargar") {
             std::string filename;
             iss >> filename;
             Load(filename);
+            ayuda();
         }  else if (cmd == "salir") {
             std::cout<< "Gracias por jugar"<<endl;
             return 0;
@@ -115,15 +118,15 @@ void ayuda() {
          << "|                          | partida guardada, se debe digitar:               |\n"
          << "|                          | inicializar juego.                               |\n"
          << "+--------------------------+--------------------------------------------------+\n"
-         << "| costo_conquista <territorio> | Calcula el costo y la secuencia de           |\n"
-         << "|                          | territorios a ser conquistados para lograr       |\n"
-         << "|                          | controlar el territorio dado por el usuario.     |\n"
-         << "|                          | Por ejemplo, para el territorio 'colombia':      |\n"
-         << "|                          | costo_conquista colombia.                        |\n"
-         << "+--------------------------+--------------------------------------------------+\n"
-         << "| conquista_mas_barata     | Calcula el territorio que implique un menor      |\n"
-         << "|                          | número de unidades de ejército perdidas.         |\n"
-         << "+--------------------------+--------------------------------------------------+\n"
+        //  << "| costo_conquista <territorio> | Calcula el costo y la secuencia de           |\n"
+        //  << "|                          | territorios a ser conquistados para lograr       |\n"
+        //  << "|                          | controlar el territorio dado por el usuario.     |\n"
+        //  << "|                          | Por ejemplo, para el territorio 'colombia':      |\n"
+        //  << "|                          | costo_conquista colombia.                        |\n"
+        //  << "+--------------------------+--------------------------------------------------+\n"
+        //  << "| conquista_mas_barata     | Calcula el territorio que implique un menor      |\n"
+        //  << "|                          | número de unidades de ejército perdidas.         |\n"
+        //  << "+--------------------------+--------------------------------------------------+\n"
          << "| ayuda                    | Muestra la lista de comandos disponibles.        |\n"
          << "+--------------------------+--------------------------------------------------+\n"
          << "| salir                    | Sale del juego Risk.                             |\n"

@@ -25,6 +25,8 @@ public:
     Tablero() {}
     Tablero(std::vector<Jugador> jugadores, std::vector<Pais> paises) : jugadores(jugadores), paises(paises) {}
     void empezar_turno();
+    void consultaPais(std::string pais_name);
+    void atacar_pais(std::string pais_origen, std::string pais_destino);
     void distribuir_tropas();
     void siguenteturno();
     Jugador obtenerJugadorTurno();
