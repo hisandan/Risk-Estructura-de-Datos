@@ -3,6 +3,12 @@
 #include "Jugador.h"
 #include <sstream>
 #include <iostream>
+
+#include "nlohmann/json.hpp" // Include the JSON library
+#include <fstream>
+using json = nlohmann::json; // Define a shortcut for the JSON library
+
+
 using namespace std;
 
 
@@ -378,5 +384,138 @@ bool Tablero::lanzar_dados() {
             cout << "El defensor gana" << endl;
             return false;
         }
+    }
+}
+
+
+void Tablero::guardar_json(std::string filename) {
+    json tablero_json;
+
+    // Convert the Tablero data to JSON
+    // Convert the 'paises' vector to a JSON array
+    json paises_array;
+    for (const Pais& pais : paises) {
+        json pais_json;
+        pais_json["nombre"] = pais.nombre;
+        pais_json["continente"] = pais.continente;
+        pais_json["dueno"] = pais.dueno;
+        pais_json["npaises"] = pais.npaises;
+        pais_json["adyacentes"] = pais.adyacentes;
+        pais_json["tropas"] = pais.tropas;
+        // Convert other relevant data from the Pais class
+
+        // Add the pais_json to the paises_array
+        paises_array.push_back(pais_json);
+    }
+
+    tablero_json["paises"] = paises_array;
+
+    tablero_json["turnoActual"] = turnoActual;
+
+    // Convert the 'jugadores' vector to a JSON array
+    json jugadores_array;
+    for (const Jugador& jugador : jugadores) {
+        json jugador_json;
+        jugador_json["nombre"] = jugador.nombre;
+        jugador_json["color"] = jugador.color;
+        jugador_json["tropas"] = jugador.tropas;
+        // Convert other relevant data from the Jugador class
+
+        // If Jugador class contains additional data, add it here.
+        jugador_json["cartas"] = jugador.cartas;
+
+        // Convert and add data from the 'paisesj' vector
+        json paisesj_array;
+        for (const Pais& pais : jugador.paisesj) {
+            json pais_json;
+            pais_json["nombre"] = pais.nombre;
+            // Include any other relevant data from the Pais class
+            paisesj_array.push_back(pais_json);
+        }
+        jugador_json["paisesj"] = paisesj_array;
+
+        // Add the jugador_json to the jugadores_array
+        jugadores_array.push_back(jugador_json);
+    }
+
+    tablero_json["jugadores"] = jugadores_array;
+
+    // Open a file for writing
+    std::ofstream outputFile(filename);
+    if (outputFile.is_open()) {
+        outputFile << tablero_json.dump(4); // Pretty print with an indentation of 4
+        outputFile.close();
+        std::cout << "Tablero data saved to JSON file." << std::endl;
+    } else {
+        std::cerr << "Error: Unable to open the file." << std::endl;
+    }
+}
+
+
+void Tablero::cargar_json(std::string filename) {
+    std::ifstream inputFile(filename);
+    if (inputFile.is_open()) {
+        json tablero_json;
+        inputFile >> tablero_json;
+
+        // Load the 'paises' data from the JSON
+        if (tablero_json.find("paises") != tablero_json.end()) {
+            paises.clear(); // Clear existing data
+            for (const auto& pais_json : tablero_json["paises"]) {
+                Pais pais;
+                pais.nombre = pais_json["nombre"];
+                pais.continente = pais_json["continente"];
+                pais.dueno = pais_json["dueno"];
+                pais.npaises = pais_json["npaises"];
+                pais.adyacentes = pais_json["adyacentes"].get<std::vector<std::string>>();
+                pais.tropas = pais_json["tropas"];
+                // Load other relevant data from the Pais class
+
+                // Add the loaded pais to the 'paises' vector
+                paises.push_back(pais);
+            }
+        }
+
+        // Load the 'turnoActual' data from the JSON
+        if (tablero_json.find("turnoActual") != tablero_json.end()) {
+            turnoActual = tablero_json["turnoActual"];
+        }
+
+        // Load the 'jugadores' data from the JSON
+        if (tablero_json.find("jugadores") != tablero_json.end()) {
+            jugadores.clear(); // Clear existing data
+            for (const auto& jugador_json : tablero_json["jugadores"]) {
+                Jugador jugador;
+                jugador.nombre = jugador_json["nombre"];
+                jugador.color = jugador_json["color"];
+                jugador.tropas = jugador_json["tropas"];
+                // Load other relevant data from the Jugador class
+
+                // Load the 'cartas' data
+                if (jugador_json.find("cartas") != jugador_json.end()) {
+                    jugador.cartas = jugador_json["cartas"].get<std::vector<std::string>>();
+                }
+
+                // Load the 'paisesj' data
+                if (jugador_json.find("paisesj") != jugador_json.end()) {
+                    for (const auto& pais_json : jugador_json["paisesj"]) {
+                        Pais pais;
+                        pais.nombre = pais_json["nombre"];
+                        // Load other relevant data from the Pais class
+
+                        // Add the loaded pais to the player's 'paisesj' vector
+                        jugador.paisesj.push_back(pais);
+                    }
+                }
+
+                // Add the loaded jugador to the 'jugadores' vector
+                jugadores.push_back(jugador);
+            }
+        }
+
+        std::cout << "Tablero data loaded from JSON file." << std::endl;
+        inputFile.close();
+    } else {
+        std::cerr << "Error: Unable to open the file." << std::endl;
     }
 }

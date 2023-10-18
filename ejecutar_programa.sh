@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile the C++ code
-g++ -o game_program clases/*.h clases/*.cpp main.cpp
+g++ -I./ -o game_program clases/*.h clases/*.cpp main.cpp
 
 # Check if compilation was successful
 if [ $? -eq 0 ]; then

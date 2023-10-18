@@ -19,7 +19,7 @@ using namespace std;
 void InitializeGame(); 
 void ayuda();
 void Turno(int JugadorId);
-void Save(const std::string& filename);
+// void Save(const std::string& filename);
 void Load(const std::string& filename);
 
 // Global variables
@@ -62,8 +62,15 @@ int main() {
         if (cmd == "ayuda") {
             ayuda();
         } else if (cmd == "inicializar") {
+            string filename;
+            iss >> filename;
+            if (!filename.empty())
+            {
+                tablero.cargar_json(filename);
+            } else{
+                InitializeGame();
+            }
             
-            InitializeGame();
             
 
         } else if (cmd == "turno") {
@@ -74,7 +81,8 @@ int main() {
         } else if (cmd == "guardar") {
             std::string filename;
             iss >> filename;
-            Save(filename);
+            tablero.guardar_json(filename);
+            // Save(filename);
             ayuda();
         } else if (cmd == "cargar") {
             std::string filename;
@@ -705,9 +713,9 @@ void Turno(int JugadorId) {
 
 }
 
-void Save(const std::string& filename) {
+// void Save(const std::string& filename) {
     
-}
+// }
 
 void Load(const std::string& filename) {
    

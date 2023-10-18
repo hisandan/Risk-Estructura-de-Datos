@@ -32,6 +32,9 @@ public:
     Jugador obtenerJugadorTurno();
     bool lanzar_dados();
 
+    void guardar_json(std::string filename);
+    void cargar_json(std::string filename);
+
 };
 
 #endif
