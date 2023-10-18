@@ -27,6 +27,7 @@ void Tablero::distribuir_tropas() {
                 i = z;
                 encontrado = true; // Se encontró el país
                 jugadores[turnoActual].paisesj[z].tropas++;
+                paises[z].tropas++;
                 cout << "... Tropa ubicada en "<< jugadores[turnoActual].paisesj[z].nombre << endl;
             }
         }
@@ -63,29 +64,70 @@ void Tablero::consultaPais(string pais_name) {
     }
 }
 
-void atacar_pais (string pais_origen, string pais_destino) {
+void Tablero::atacar_pais (string pais_origen, string pais_destino) {
 
     bool pais_origen_encontrado = false;
     bool pais_origen_correcto = false;
 
     bool pais_destino_encontrado = false;
-    bool pais_destino_correcto = false;
+    bool pais_destino_correcto = true;
 
-    // // verificar que el pais de origen pertenece al jugador del turno actual
-    // for (int i = 0; !encontrado && i < paises.size(); i++) {
-    //     if (paises[i].nombre == pais_name) {
-    //         encontrado = true;
-    //         cout << "-- Nombre: " << paises[i].nombre << endl;
-    //         cout << "-- Continente: " << paises[i].continente << endl;
-    //         cout << "-- Tropas: " << paises[i].tropas << endl;
-    //         cout << "-- Jugador: " << paises[i].dueno << endl;
-    //     }
-    // }
-    // if (!encontrado) {
-    //     cout << "No se encontro el pais de origen" << endl;
-    // }
-    // if
+    // verificar que el pais de origen pertenece al jugador del turno actual
+    for (int i = 0; !pais_origen_encontrado && i < paises.size(); i++) {
+        if (paises[i].nombre == pais_origen) {
+            pais_origen_encontrado = true;
+            if (paises[i].dueno == jugadores[turnoActual].nombre) {
+                pais_origen_correcto = true;
+            }
+
+        }
+    }
+    if (!pais_origen_encontrado) {
+        cout << "No se encontro el pais de origen" << endl;
+        return;
+    }
+    if (!pais_origen_correcto) {
+        cout << "El pais de origen no le pertenece" << endl;
+        return;
+    }
     // verificar que el pais de destino no pertenece al jugador del turno actual
+    for (int i = 0; !pais_destino_encontrado && i < paises.size(); i++) {
+        if (paises[i].nombre == pais_destino) {
+            pais_destino_encontrado = true;
+            if (paises[i].dueno == jugadores[turnoActual].nombre) {
+                pais_destino_correcto = false;
+            }
+
+        }
+    }
+    if (!pais_destino_encontrado) {
+        cout << "No se encontro el pais de destino" << endl;
+        return;
+
+    }
+    if (!pais_destino_correcto) {
+        cout << "El pais de destino ya le  pertenece" << endl;
+        return;
+    }
+
+    // verificar que el pais de origen y destino sean adyacentes
+    bool adyacente = false;
+    for (int i = 0; !adyacente && i < paises.size(); i++) {
+        if (paises[i].nombre == pais_origen) {
+            for (int j = 0; !adyacente && j < paises[i].adyacentes.size(); j++) {
+                if (paises[i].adyacentes[j] == pais_destino) {
+                    adyacente = true;
+                }
+            }
+        }
+    }
+    if (!adyacente) {
+        cout << "El pais de origen y destino no son adyacentes" << endl;
+        return;
+    }
+
+
+
 }
 
 void Tablero::empezar_turno() {
@@ -103,9 +145,9 @@ void Tablero::empezar_turno() {
         //  << "| conquista_mas_barata     | Calcula el territorio que implique un menor      |\n"
         //  << "|                          | número de unidades de ejército perdidas.         |\n"
          << "+--------------------------+--------------------------------------------------+\n"
-         << "| atacar_pais <destino>    | Ataca al pais destino                            |\n"
+         << "| atacar_pais              | Ataca al pais destino                            |\n"
          << "+--------------------------+--------------------------------------------------+\n"
-         << "| consulta_pais            | Información de un país                           |\n"
+         << "| consulta_pais <nomb_pais>| Información de un país (Tropas, Jugadro, etc)    |\n"
          << "+--------------------------+--------------------------------------------------+\n"
          << "| terminar_turno           | Termina el turno Actual                          |\n"
          << "+--------------------------+--------------------------------------------------+\n";
@@ -121,11 +163,14 @@ void Tablero::empezar_turno() {
 
         if (cmd == "atacar_pais") {
             string pais_origen;
-            std::cout << "Pais de Origen$ ";
+            string pais_destino;
+            std::cout << "Atacando -> Pais de Origen: "<< endl << "$ ";
             std::getline(std::cin, pais_origen);
-            atacar_pais(pais_origen, iss.str().substr(12));
+            std::cout << "Atacando -> Pais de Destino: "<< endl << "$ ";
+            std::getline(std::cin, pais_destino);
+            atacar_pais(pais_origen, pais_destino);
             // atacar_pais();
-            continue;
+            
         } else if (cmd == "consulta_pais") {
             // string pais_name;
             // iss >> pais_name;

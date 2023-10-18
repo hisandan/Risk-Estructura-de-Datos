@@ -377,103 +377,80 @@ void InitializeGame() {
 
    
     
-    //se crean los jugadores y se le añaden las tropas iniciales
+    //Especificamos el numero de tropas para cada jugador
+    int num_tropas = 0;
+    if (numjugadores == 3){num_tropas = 35;}
+    else if (numjugadores == 4){num_tropas = 30;}
+    else if (numjugadores == 5){num_tropas = 25;}
+    else if (numjugadores == 6){num_tropas = 20;}
+
     for (int i = 0; i < numjugadores; ++i) {
         Jugador Jugador;
         std::cout << "Enter Jugador " << (i + 1) << " name: ";
         std::cin >> Jugador.nombre;
+        Jugador.tropas = num_tropas; // Numero de tropas iniciales
+        tablero.jugadores.push_back(Jugador);
+    }
 
-        
-        if (numjugadores == 3)
-        {
-            Jugador.tropas = 35; // Numero de tropas iniciales
-            tablero.jugadores.push_back(Jugador);
-
+    cin.ignore();
+    
+    // se reparten los paises entre los jugadores
+    for (int j = 0; j < num_tropas*numjugadores; j++){ 
+        if(j == tablero.paises.size()){
+            cout << "### Se han repartido los paises entre los jugadores ###" << endl;
         }
-        else if (numjugadores == 4)
-        {
-            Jugador.tropas = 30; // Numero de tropas iniciales
-            tablero.jugadores.push_back(Jugador);
-
-        }
-        
-        else if (numjugadores == 5)
-        {
-            Jugador.tropas = 25; // Numero de tropas iniciales
-            tablero.jugadores.push_back(Jugador);
-
-        }
-
-        else if (numjugadores == 6)
-        {
-            Jugador.tropas = 20; // Numero de tropas iniciales
-            tablero.jugadores.push_back(Jugador);
-
-        }
-
-        }
-
-        cin.ignore();
-        // se reparten los paises entre los jugadores
-       for (int j = 0; j < tablero.paises.size(); j++){ 
         std::cout << tablero.jugadores[j%numjugadores].nombre<<" - Seleccione el pais donde quiere poner tropas:"  << std::endl << "$ ";
-        
         // std::string test;
         // cin >> test; 
         std::string x;
         std::getline(std::cin, x);
 
         // encuentra la posicion del nombre del pais
-            int i=0;
-            bool encontrado = false;
-            cout << x << endl;
-            for (int z = 0; !encontrado && z < tablero.paises.size(); z++) {
-                // std::cout << tablero.paises[z].nombre << endl;
-                if (tablero.paises[z].nombre == x) {
-                    // cout << "...................." << endl;
-                    i = z;
-                    encontrado = true; // Se encontró el país
-                }
+        int i=0;
+        bool encontrado = false;
+        cout << x << endl;
+        for (int z = 0; !encontrado && z < tablero.paises.size(); z++) {
+            // std::cout << tablero.paises[z].nombre << endl;
+            if (tablero.paises[z].nombre == x) {
+                // cout << "...................." << endl;
+                i = z;
+                encontrado = true; // Se encontró el país
             }
+        }
+        if (!encontrado) {
+            std::cout << "... No se encontro el pais, verifique si tiene errores de ortografia" << std::endl;
+            j--;
+            continue; // Pasa a la siguiente iteración del bucle for
+        }
 
-            
+        if (tablero.paises[i].dueno == "vacio")
+        {
+            tablero.paises[i].dueno= tablero.jugadores[j%numjugadores].nombre;
+            tablero.paises[i].tropas = 1;
+            tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
+            tablero.jugadores[j%numjugadores].paisesj.push_back(tablero.paises[i]);
+            std::cout<<"... Pais añadido, tropas añadidas!"<<std::endl;
 
-            
-            if (!encontrado) {
-                std::cout << "... No se encontro el pais, verifique si tiene errores de ortografia" << std::endl;
+        }
+        else if (tablero.paises[i].dueno ==tablero.jugadores[j%numjugadores].nombre){
+            if (j< tablero.paises.size()){
                 j--;
-                continue; // Pasa a la siguiente iteración del bucle for
-            }
-
-            if (tablero.paises[i].dueno == "vacio")
-            {
-               tablero.paises[i].dueno= tablero.jugadores[j%numjugadores].nombre;
-               tablero.paises[i].tropas = 1;
-               tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
-               tablero.jugadores[j%numjugadores].paisesj.push_back(tablero.paises[i]);
-               std::cout<<"... Pais añadido, tropas añadidas!"<<std::endl;
-
-            }
-            else if (tablero.paises[i].dueno ==tablero.jugadores[j%numjugadores].nombre){
+                std::cout<<"... Usted ya ocupo este territorio. Porfavor seleccione otro territorio mientras se llenan todos los territorios!"<<std::endl;
+                continue;
+            }else{
                 tablero.paises[i].tropas = tablero.paises[i].tropas + 1;
                 tablero.jugadores[j%numjugadores].tropas = tablero.jugadores[j%numjugadores].tropas - 1;
                 std::cout<<"... Tropas añadidas!"<<std::endl;
-
-
-            }
-            else{
-                
-                std::cout<<"... Ya hay tropas en este pais, seleccione otro"<<std::endl;
-
-                j--;
             }
 
-             
-            // tablero.jugadores = jugadores;
-            // tablero.paises = paises;
-        
-       
-       }
+        }
+        else{
+            std::cout<<"... Ya hay tropas de otro jugador en este pais, seleccione otro"<<std::endl;
+            j--;
+        }
+
+    }
+
     ayuda();
     
     
