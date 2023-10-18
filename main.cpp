@@ -144,222 +144,450 @@ void ayuda() {
 
 void crear_paises(){
     Pais pais;
-    //Se llenan los datos de los paises
-    //Norte america
-    pais.nombre = "Alaska";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
 
-    pais.nombre = "Alberta";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Alaska
+pais.nombre = "Alaska";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Territorio Noroccidental");
+pais.adyacentes.push_back("Kamchatka");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "America Central";
-    pais.continente = "America del norte";
-   pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Alberta
+pais.nombre = "Alberta";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Alaska");
+pais.adyacentes.push_back("Territorio Noroccidental");
+pais.adyacentes.push_back("Ontario");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Estados Unidos Orientales";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// America Central
+pais.nombre = "America Central";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Ontario");
+pais.adyacentes.push_back("Estados Unidos Orientales");
+pais.adyacentes.push_back("Venezuela");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Groenlandia";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Estados Unidos Orientales
+pais.nombre = "Estados Unidos Orientales";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Ontario");
+pais.adyacentes.push_back("America Central");
+pais.adyacentes.push_back("Quebec");
+pais.adyacentes.push_back("Estados Unidos Occidentales");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Territorio Noroccidental";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Groenlandia
+pais.nombre = "Groenlandia";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Quebec");
+pais.adyacentes.push_back("Islandia");
+pais.adyacentes.push_back("Europa del Norte");
+pais.adyacentes.push_back("Territorio Noroccidental");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Ontario";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Territorio Noroccidental
+pais.nombre = "Territorio Noroccidental";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Alaska");
+pais.adyacentes.push_back("Alberta");
+pais.adyacentes.push_back("Ontario");
+pais.adyacentes.push_back("Groenlandia");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Quebec";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
-    
-    pais.nombre = "Estados Unidos Occidentales";
-    pais.continente = "America del norte";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Ontario
+pais.nombre = "Ontario";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Alberta");
+pais.adyacentes.push_back("Territorio Noroccidental");
+pais.adyacentes.push_back("Estados Unidos Orientales");
+pais.adyacentes.push_back("Quebec");
+tablero.paises.push_back(pais);
 
-    //sur america
-    pais.nombre = "Argentina";
-    pais.continente = "America del Sur";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
 
-    pais.nombre = "Brasil";
-    pais.continente = "America del Sur";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Quebec
+pais.nombre = "Quebec";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Ontario");
+pais.adyacentes.push_back("Estados Unidos Orientales");
+pais.adyacentes.push_back("Groenlandia");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Peru";
-    pais.continente = "America del Sur";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
-    
-    pais.nombre = "Venezuela";
-    pais.continente = "America del Sur";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
-    
-    //Australia
-    pais.nombre = "Australia Oriental";
-    pais.continente = "Australia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Estados Unidos Occidentales
+pais.nombre = "Estados Unidos Occidentales";
+pais.continente = "America del norte";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Alberta");
+pais.adyacentes.push_back("Ontario");
+pais.adyacentes.push_back("Estados Unidos Orientales");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Indonesia";
-    pais.continente = "Australia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Argentina
+pais.nombre = "Argentina";
+pais.continente = "America del Sur";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Brasil");
+pais.adyacentes.push_back("Peru");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Nueva Guinea";
-    pais.continente = "Australia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Brasil
+pais.nombre = "Brasil";
+pais.continente = "America del Sur";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Argentina");
+pais.adyacentes.push_back("Peru");
+pais.adyacentes.push_back("Venezuela");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Australia Occidental";
-    pais.continente = "Australia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
-    
-    //Europa
-    pais.nombre = "Gran Bretaña";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Peru
+pais.nombre = "Peru";
+pais.continente = "America del Sur";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Argentina");
+pais.adyacentes.push_back("Brasil");
+pais.adyacentes.push_back("Venezuela");
+tablero.paises.push_back(pais);
+
+// Venezuela
+pais.nombre = "Venezuela";
+pais.continente = "America del Sur";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Brasil");
+pais.adyacentes.push_back("Peru");
+pais.adyacentes.push_back("America Central");
+tablero.paises.push_back(pais);
+
+// Australia Oriental
+pais.nombre = "Australia Oriental";
+pais.continente = "Australia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Australia Occidental");
+pais.adyacentes.push_back("Indonesia");
+tablero.paises.push_back(pais);
+
+
+// Indonesia
+pais.nombre = "Indonesia";
+pais.continente = "Australia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Nueva Guinea");
+pais.adyacentes.push_back("Australia Occidental");
+tablero.paises.push_back(pais);
+
+// Nueva Guinea
+pais.nombre = "Nueva Guinea";
+pais.continente = "Australia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Indonesia");
+pais.adyacentes.push_back("Australia Oriental");
+tablero.paises.push_back(pais);
+
+// Australia Occidental
+pais.nombre = "Australia Occidental";
+pais.continente = "Australia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Indonesia");
+pais.adyacentes.push_back("Nueva Guinea");
+tablero.paises.push_back(pais);
+
+// Gran Bretaña
+pais.nombre = "Gran Bretaña";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Islandia");
+pais.adyacentes.push_back("Europa Occidental");
+pais.adyacentes.push_back("Escandinavia");
+tablero.paises.push_back(pais);
+
+// Islandia
+pais.nombre = "Islandia";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Groenlandia");
+pais.adyacentes.push_back("Gran Bretaña");
+pais.adyacentes.push_back("Escandinavia");
+tablero.paises.push_back(pais);
+
+
+   // Europa del Norte
+pais.nombre = "Europa del Norte";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Gran Bretaña");
+pais.adyacentes.push_back("Escandinavia");
+pais.adyacentes.push_back("Europa del Sur");
+pais.adyacentes.push_back("Ucrania");
+tablero.paises.push_back(pais);
+
+// Escandinavia
+pais.nombre = "Escandinavia";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Islandia");
+pais.adyacentes.push_back("Gran Bretaña");
+pais.adyacentes.push_back("Europa del Norte");
+pais.adyacentes.push_back("Rusia");
+tablero.paises.push_back(pais);
+
+// Europa del Sur
+pais.nombre = "Europa del Sur";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Gran Bretaña");
+pais.adyacentes.push_back("Escandinavia");
+pais.adyacentes.push_back("Norte de África");
+pais.adyacentes.push_back("Ucrania");
+tablero.paises.push_back(pais);
+
+// Ucrania
+pais.nombre = "Ucrania";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Escandinavia");
+pais.adyacentes.push_back("Europa del Norte");
+pais.adyacentes.push_back("Europa del Sur");
+pais.adyacentes.push_back("Rusia");
+pais.adyacentes.push_back("Afganistán");
+tablero.paises.push_back(pais);
+
+// Europa Occidental
+pais.nombre = "Europa Occidental";
+pais.continente = "Europa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Gran Bretaña");
+pais.adyacentes.push_back("Norte de África");
+pais.adyacentes.push_back("Europa del Sur");
+tablero.paises.push_back(pais);
    
-    pais.nombre = "Islandia";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+    
 
-    pais.nombre = "Europa del Norte";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
 
-    pais.nombre = "Escandinavia";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
 
-    pais.nombre = "Europa del Sur";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Afghanistan
+pais.nombre = "Afghanistan";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Ucrania");
+pais.adyacentes.push_back("China");
+pais.adyacentes.push_back("India");
+pais.adyacentes.push_back("Oriente Medio");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Ucrania";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
-   
-    pais.nombre = "Europa Occidental";
-    pais.continente = "Europa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
-   
-    //Asia
-    pais.nombre = "Afghanistan";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// China
+pais.nombre = "China";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Afghanistan");
+pais.adyacentes.push_back("India");
+pais.adyacentes.push_back("Siam");
+pais.adyacentes.push_back("Mongolia");
+pais.adyacentes.push_back("Ural");
+pais.adyacentes.push_back("Siberia");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "China";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// India
+pais.nombre = "India";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Afghanistan");
+pais.adyacentes.push_back("China");
+pais.adyacentes.push_back("Siam");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "India";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Irkutsk
+pais.nombre = "Irkutsk";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Siberia");
+pais.adyacentes.push_back("Yakutsk");
+pais.adyacentes.push_back("Kamchatka");
+pais.adyacentes.push_back("Mongolia");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Irkutsk";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Japon
+pais.nombre = "Japon";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Mongolia");
+pais.adyacentes.push_back("Kamchatka");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Japon";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Kamchatka
+pais.nombre = "Kamchatka";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Alaska");
+pais.adyacentes.push_back("Irkutsk");
+pais.adyacentes.push_back("Mongolia");
+pais.adyacentes.push_back("Japon");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Kamchatka";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
 
-    pais.nombre = "Medio Oriente";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
 
-    pais.nombre = "Mongolia";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Medio Oriente
+pais.nombre = "Medio Oriente";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Europa del Sur");
+pais.adyacentes.push_back("Ucrania");
+pais.adyacentes.push_back("India");
+pais.adyacentes.push_back("Egipto");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Siam";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Mongolia
+pais.nombre = "Mongolia";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("China");
+pais.adyacentes.push_back("Siberia");
+pais.adyacentes.push_back("Irkutsk");
+pais.adyacentes.push_back("Kamchatka");
+pais.adyacentes.push_back("Japon");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Siberia";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Siam
+pais.nombre = "Siam";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("China");
+pais.adyacentes.push_back("India");
+pais.adyacentes.push_back("Indonesia");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Ural";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Siberia
+pais.nombre = "Siberia";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("China");
+pais.adyacentes.push_back("Mongolia");
+pais.adyacentes.push_back("Irkutsk");
+pais.adyacentes.push_back("Yakutsk");
+pais.adyacentes.push_back("Ural");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Yakutsk";
-    pais.continente = "Asia";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Ural
+pais.nombre = "Ural";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Afganistán");
+pais.adyacentes.push_back("Ucrania");
+pais.adyacentes.push_back("Siberia");
+pais.adyacentes.push_back("China");
+tablero.paises.push_back(pais);
 
-    //Africa
-    pais.nombre = "Congo";
-    pais.continente = "Africa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Yakutsk
+pais.nombre = "Yakutsk";
+pais.continente = "Asia";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Siberia");
+pais.adyacentes.push_back("Irkutsk");
+pais.adyacentes.push_back("Kamchatka");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Africa Oriental";
-    pais.continente = "Africa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+    
+// Congo
+pais.nombre = "Congo";
+pais.continente = "Africa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Africa Oriental");
+pais.adyacentes.push_back("Africa del Norte");
+pais.adyacentes.push_back("Africa del Sur");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Egipto";
-    pais.continente = "Africa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Africa Oriental
+pais.nombre = "Africa Oriental";
+pais.continente = "Africa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Congo");
+pais.adyacentes.push_back("Madagascar");
+pais.adyacentes.push_back("Egipto");
+pais.adyacentes.push_back("Africa del Sur");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Madagascar";
-    pais.continente = "Africa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Egipto
+pais.nombre = "Egipto";
+pais.continente = "Africa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Africa Oriental");
+pais.adyacentes.push_back("Madagascar");
+pais.adyacentes.push_back("Africa del Norte");
+pais.adyacentes.push_back("Medio Oriente");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Africa del Norte";
-    pais.continente = "Africa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Madagascar
+pais.nombre = "Madagascar";
+pais.continente = "Africa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Africa Oriental");
+pais.adyacentes.push_back("Egipto");
+tablero.paises.push_back(pais);
 
-    pais.nombre = "Africa del Sur";
-    pais.continente = "Africa";
-    pais.dueno="vacio";
-    tablero.paises.push_back(pais);
+// Africa del Norte
+pais.nombre = "Africa del Norte";
+pais.continente = "Africa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Congo");
+pais.adyacentes.push_back("Egipto");
+pais.adyacentes.push_back("Medio Oriente");
+tablero.paises.push_back(pais);
+
+// Africa del Sur
+pais.nombre = "Africa del Sur";
+pais.continente = "Africa";
+pais.dueno = "vacio";
+pais.tropas = 0;
+pais.adyacentes.push_back("Congo");
+pais.adyacentes.push_back("Africa Oriental");
+tablero.paises.push_back(pais);
 };
 
 

@@ -121,6 +121,7 @@ void Tablero::atacar_pais (string pais_origen, string pais_destino) {
             }
         }
     }
+    
     if (!adyacente) {
         cout << "El pais de origen y destino no son adyacentes" << endl;
         return;
