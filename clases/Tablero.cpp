@@ -513,9 +513,9 @@ void Tablero::cargar_json(std::string filename) {
             }
         }
 
-        std::cout << "Tablero data loaded from JSON file." << std::endl;
+        std::cout << "Datos inicializados correctamente desde el archivo" << filename << "." << std::endl;
         inputFile.close();
     } else {
-        std::cerr << "Error: Unable to open the file." << std::endl;
+        std::cerr << "Error: No se pudo abrir el archivo" << std::endl;
     }
 }
