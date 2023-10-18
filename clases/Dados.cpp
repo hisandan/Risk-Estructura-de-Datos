@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdlib> // Include this for rand()
 
+
 Dados::Dados(std::string tipo, std::vector<int> dados) : tipo(tipo), dados(dados) {
     // You can perform any additional initialization here if needed
 }

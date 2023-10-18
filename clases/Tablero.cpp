@@ -1,4 +1,5 @@
 #include "Tablero.h"
+#include "Dados.h"
 #include "Jugador.h"
 #include <sstream>
 #include <iostream>
@@ -121,13 +122,124 @@ void Tablero::atacar_pais (string pais_origen, string pais_destino) {
             }
         }
     }
-    
+
     if (!adyacente) {
         cout << "El pais de origen y destino no son adyacentes" << endl;
         return;
     }
 
+    // Datos pais origen
+    string jugador_atacante = jugadores[turnoActual].nombre;
+    int tropas_pais_origen;
+    for (int i = 0;  i < paises.size(); i++) {
+        if (paises[i].nombre == pais_origen) {
+            tropas_pais_origen = paises[i].tropas;
+            cout << "tropas" << tropas_pais_origen << endl;
+        }
+    }
+    if (tropas_pais_origen < 2) {
+        cout << "El pais de origen no tiene suficientes tropas" << endl;
+        return;
+    }
 
+    // Datos pais destino
+    string jugador_defensor;
+    for (int i = 0;  i < paises.size(); i++) {
+        if (paises[i].nombre == pais_destino) {
+            jugador_defensor = paises[i].dueno;
+            break;
+        }
+    }
+
+    int tropas_pais_destino;
+    for (int i = 0; i < paises.size(); i++) {
+        if (paises[i].nombre == pais_destino) {
+            tropas_pais_destino = paises[i].tropas;
+        }
+    }
+
+
+    // Imprime la información del ataque
+    cout <<"--->"<< jugador_atacante << " ataca a "<<jugador_defensor << " desde " << pais_origen << " hacia " << pais_destino << endl;
+    cout << "-- Tropas en " << pais_origen << ": " << tropas_pais_origen << endl;
+    cout << "-- Tropas en " << pais_destino << ": " <<tropas_pais_destino << endl;
+    
+    // Lanza los dados
+    bool gana_atacante = lanzar_dados();
+
+    // realiza cambios en tropas
+    if(gana_atacante){
+        // atacante gana
+        // se resta una tropa al pais de destino
+        for (int i = 0; i < paises.size(); i++) {
+            if (paises[i].nombre == pais_destino) {
+                paises[i].tropas--;
+                break;
+            }
+        }
+        // se resta una tropa al jugador del pais de destino
+        for (int i = 0; i < jugadores.size(); i++) {
+            if (jugadores[i].nombre == jugador_defensor) {
+                jugadores[i].tropas--;
+                break;
+            }
+        }
+        // en caso de que el pais quede sin tropas se le asigna al atacante pasando todas las tropas excepto una  del pais atacante al pais de destino
+        if (tropas_pais_destino == 1) {
+
+            // imprime que el pais ha sido conquistado
+            cout << "-- El pais ha sido conquistado!!" << endl;
+            // se pasa todas las tropas excepto una del pais de origen al pais de destino
+            for (int i = 0; i < paises.size(); i++) {
+                if (paises[i].nombre == pais_origen) {
+                    paises[i].tropas--;
+                    break;
+                }
+            }
+            for (int i = 0; i < paises.size(); i++) {
+                if (paises[i].nombre == pais_destino) {
+                    paises[i].tropas = tropas_pais_origen;
+                    break;
+                }
+            }
+            // se pasa el pais de destino al jugador atacante
+            for (int i = 0; i < jugadores.size(); i++) {
+                if (jugadores[i].nombre == jugador_defensor) {
+                    for (int j = 0; j < jugadores[i].paisesj.size(); j++) {
+                        if (jugadores[i].paisesj[j].nombre == pais_destino) {
+                            jugadores[i].paisesj.erase(jugadores[i].paisesj.begin() + j);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            for (int i = 0; i < jugadores.size(); i++) {
+                if (jugadores[i].nombre == jugador_atacante) {
+                    jugadores[i].paisesj.push_back(paises[i]);
+                    break;
+                }
+            }
+        }
+    }
+    else{
+        // gana defensor
+        // se resta una tropa al pais de origen
+        for (int i = 0; i < paises.size(); i++) {
+            if (paises[i].nombre == pais_origen) {
+                paises[i].tropas--;
+                break;
+            }
+        }
+        // se resta una tropa al jugador del pais de origen
+        for (int i = 0; i < jugadores.size(); i++) {
+            if (jugadores[i].nombre == jugador_atacante) {
+                jugadores[i].tropas--;
+                break;
+            }
+        }
+
+    }
 
 }
 
@@ -170,6 +282,7 @@ void Tablero::empezar_turno() {
             std::cout << "Atacando -> Pais de Destino: "<< endl << "$ ";
             std::getline(std::cin, pais_destino);
             atacar_pais(pais_origen, pais_destino);
+            cout << "-- Ataque finalizado" << endl<< endl;
             // atacar_pais();
             
         } else if (cmd == "consulta_pais") {
@@ -195,26 +308,75 @@ Jugador Tablero::obtenerJugadorTurno() {
     return jugadores[turnoActual];
 }
 
-std::pair<int, int> Tablero::comparar_dados(Dados atacante, Dados defensor) {
-    std::pair<int, int> resultado;
-    int tropas_atacante = 0;
-    int tropas_defensor = 0;
-    for (int i = 0; i < atacante.dados.size(); i++) {
-        if (atacante.dados[i] > defensor.dados[i]) {
-            tropas_defensor++;
+bool Tablero::lanzar_dados() {
+    // Devuelve true si gana el atacante o false si gana el defensor
+
+    //     El resultado del ataque se define a través de los dados: el jugador
+    // atacante lanza 3 dados de color rojo, mientras que el jugador que defiende lanza 2 dados blancos. Los dados
+    // de uno y otro se emparejan y se comparan para determinar cuántas unidades de ejército pierde o gana cada
+    // uno: si el del atacante es mayor que el del defensor, el defensor pierde una unidad de ejército del territorio
+    // atacado; si el del defensor es mayor al del atacante, el atacante pierde una unidad de ejército del territorio
+    // desde el que se ataca; si hay empate, el defensor es quien gana, por lo que el atacante pierde una unidad
+    // de ejército de su territorio
+
+    // jugador atacante tiene 3 datos
+    Dados atacante("rojo", {0, 0, 0});
+
+    // jugador defensor tiene 2 datos
+    Dados defensor("blanco", {0, 0});
+
+
+    // Lanzar dados
+    // presione enter para tirar dados
+    cout << "-- Atacante: Presione enter para tirar dados..." ;
+    cin.ignore();
+    atacante.tirarDados();
+    atacante.imprimirDados();
+
+    cout << "-- Defensor: Presione enter para tirar dados..." ;
+    cin.ignore();
+    defensor.tirarDados();
+    defensor.imprimirDados();
+
+
+    // Ordenar dados
+    atacante.ordenarDados();
+    defensor.ordenarDados();
+
+    // // Imprimir dados
+    // cout << "Dados del atacante: ";
+    // atacante.imprimirDados();
+    // cout << "Dados del defensor: ";
+    // defensor.imprimirDados();
+
+
+    // Obtener mayor
+    int mayor_atacante = atacante.obtenerMayor();
+    int mayor_defensor = defensor.obtenerMayor();
+
+    // Obtener segundo mayor
+    int segundo_mayor_atacante = atacante.obtenerSegundoMayor();
+    int segundo_mayor_defensor = defensor.obtenerSegundoMayor();
+
+    // Comparar dados
+    if (mayor_atacante > mayor_defensor) {
+        // El atacante gana
+        cout << "El atacante gana" << endl;
+        return true;
+    } else if (mayor_atacante < mayor_defensor) {
+        // El defensor gana
+        cout << "El defensor gana" << endl;
+        return false;
+    } else {
+        // Empate
+        if (segundo_mayor_atacante > segundo_mayor_defensor) {
+            // El atacante gana
+            cout << "El atacante gana" << endl;
+            return true;
         } else {
-            tropas_atacante++;
+            // El defensor gana
+            cout << "El defensor gana" << endl;
+            return false;
         }
     }
-    resultado.first = tropas_atacante;
-    resultado.second = tropas_defensor;
-    return resultado;
-}
-
-void Tablero::Atacar(Pais atacante, Pais defensor) {
-    // Implement the attack logic here
-    // You will need to add the necessary code to handle attacks between countries
-    // and ownership changes as mentioned in your original code.
-    // Make sure to include the required headers and logic for your game.
-    // This code is a placeholder, and you should customize it according to your game's rules.
 }

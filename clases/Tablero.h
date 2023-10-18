@@ -30,8 +30,7 @@ public:
     void distribuir_tropas();
     void siguenteturno();
     Jugador obtenerJugadorTurno();
-    std::pair<int, int> comparar_dados(Dados atacante, Dados defensor);
-    void Atacar(Pais atacante, Pais defensor);
+    bool lanzar_dados();
 
 };
 

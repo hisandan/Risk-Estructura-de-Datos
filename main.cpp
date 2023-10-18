@@ -7,6 +7,11 @@
 #include "clases/Pais.h"
 #include "clases/Tablero.h"
 
+// for random seed and random number generation
+#include <ctime>
+#include <cstdlib>
+
+
 using namespace std; 
 
 // Function prototypes
@@ -27,6 +32,11 @@ void crear_paises();
 
 
 int main() {
+    // Seed the random number generator
+    srand(time(0));
+    
+
+
     crear_paises();
     cout << "Bienvenido a RISK" << std::endl;
     ayuda();

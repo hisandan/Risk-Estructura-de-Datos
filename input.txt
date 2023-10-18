@@ -116,3 +116,9 @@ Alaska
 Alaska
 Alaska
 Alaska
+atacar_pais
+Alaska
+Kamchatka
+
+
+consulta_pais Kamchatka
