@@ -34,19 +34,22 @@ void crear_paises();
 
 int main() {
 
-    Huffman huffman;
+    // ----------------HUFFMAN --------------
+    // Huffman huffman;
 
-    std::string archivoEntrada = "input.txt";
-    std::string archivoComprimido = "comprimido.bin";
-    std::string archivoDescomprimido = "descomprimido.txt";
+    // std::string archivoEntrada = "input.txt";
+    // std::string archivoComprimido = "comprimido.bin";
+    // std::string archivoDescomprimido = "descomprimido.txt";
 
-    // Comprimir archivo
-    huffman.comprimirArchivo(archivoEntrada, archivoComprimido);
-    std::cout << "Archivo comprimido." << std::endl;
+    // // Comprimir archivo
+    // huffman.comprimirArchivo(archivoEntrada, archivoComprimido);
+    // std::cout << "Archivo comprimido." << std::endl;
 
-    // // Descomprimir archivo
+    // // // Descomprimir archivo
     // huffman.descomprimirArchivo(archivoComprimido, archivoDescomprimido);
     // std::cout << "Archivo descomprimido." << std::endl;
+
+    // ------------------------------------
 
     // Seed the random number generator
     srand(time(0));
