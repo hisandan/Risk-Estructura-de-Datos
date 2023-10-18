@@ -6,6 +6,7 @@
 #include "clases/Jugador.h"
 #include "clases/Pais.h"
 #include "clases/Tablero.h"
+#include "clases/Huffman.h"
 
 // for random seed and random number generation
 #include <ctime>
@@ -32,6 +33,21 @@ void crear_paises();
 
 
 int main() {
+
+    Huffman huffman;
+
+    std::string archivoEntrada = "input.txt";
+    std::string archivoComprimido = "comprimido.bin";
+    std::string archivoDescomprimido = "descomprimido.txt";
+
+    // Comprimir archivo
+    huffman.comprimirArchivo(archivoEntrada, archivoComprimido);
+    std::cout << "Archivo comprimido." << std::endl;
+
+    // // Descomprimir archivo
+    // huffman.descomprimirArchivo(archivoComprimido, archivoDescomprimido);
+    // std::cout << "Archivo descomprimido." << std::endl;
+
     // Seed the random number generator
     srand(time(0));
     
