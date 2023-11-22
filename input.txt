@@ -122,3 +122,4 @@ Kamchatka
 
 
 consulta_pais Kamchatka
+terminar_turno

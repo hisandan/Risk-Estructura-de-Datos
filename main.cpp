@@ -35,17 +35,17 @@ void crear_paises();
 int main() {
 
     // ----------------HUFFMAN --------------
-    // Huffman huffman;
+    Huffman huffman;
 
     // std::string archivoEntrada = "input.txt";
     // std::string archivoComprimido = "comprimido.bin";
     // std::string archivoDescomprimido = "descomprimido.txt";
 
-    // // Comprimir archivo
+    // // // Comprimir archivo
     // huffman.comprimirArchivo(archivoEntrada, archivoComprimido);
     // std::cout << "Archivo comprimido." << std::endl;
 
-    // // // Descomprimir archivo
+    // // // // Descomprimir archivo
     // huffman.descomprimirArchivo(archivoComprimido, archivoDescomprimido);
     // std::cout << "Archivo descomprimido." << std::endl;
 
@@ -108,6 +108,27 @@ int main() {
             iss >> filename;
             Load(filename);
             ayuda();
+
+        } else if (cmd == "guardar_comprimido") {
+            std::string filename;
+            iss >> filename;
+            
+            string filename_json = "temp.json";
+            // realiza tablero.guardar_json(filename_json); y luego sobre ese archivo realiza huffman.comprimirArchivo(archivoEntrada, filename); y por último elimina el archivo json
+            tablero.guardar_json(filename_json);
+            huffman.comprimirArchivo(filename_json, filename);
+            remove(filename_json.c_str());
+
+            ayuda();
+        } else if (cmd == "cargar_comprimido") {
+            std::string filename;
+            iss >> filename;
+            string filename_json = "temp.json";
+            huffman.descomprimirArchivo(filename, filename_json);
+            tablero.cargar_json(filename_json);
+            remove(filename_json.c_str());
+            
+            ayuda();
         }  else if (cmd == "salir") {
             std::cout<< "Gracias por jugar"<<endl;
             return 0;
@@ -143,6 +164,12 @@ void ayuda() {
          << "|                          | guardar juego.                                   |\n"
          << "+--------------------------+--------------------------------------------------+\n"
          << "| guardar_comprimido       | Guarda el estado actual del juego en un archivo  |\n"
+         << "| <nombre_archivo>         | binario comprimido. Por ejemplo, si se desea     |\n"
+         << "|                          | guardar la partida bajo el nombre de 'juego',    |\n"
+         << "|                          | se debe digitar el comando de esta manera:       |\n"
+         << "|                          | guardar_comprimido juego.                        |\n"
+         << "+--------------------------+--------------------------------------------------+\n"
+         << "| cargar_comprimido       | Guarda el estado actual del juego en un archivo  |\n"
          << "| <nombre_archivo>         | binario comprimido. Por ejemplo, si se desea     |\n"
          << "|                          | guardar la partida bajo el nombre de 'juego',    |\n"
          << "|                          | se debe digitar el comando de esta manera:       |\n"

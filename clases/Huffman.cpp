@@ -24,20 +24,6 @@ void Huffman::guardarTablaDeCodigos(const std::unordered_map<char, std::string>&
     archivoSalida << "#"; // Marcar el final de la tabla de códigos
 }
 
-// std::unordered_map<std::string, char> Huffman::cargarTablaDeCodigos(std::ifstream& archivoEntrada) {
-//     std::unordered_map<std::string, char> tablaDeCodigos;
-//     char caracter;
-//     std::string codigo;
-//     while (archivoEntrada.get(caracter)) {
-//         if (caracter == '#') {
-//             break; // Fin de la tabla de códigos
-//         }
-//         archivoEntrada.get(caracter); // Leer el siguiente caracter (después del espacio)
-//         archivoEntrada >> codigo;
-//         tablaDeCodigos[codigo] = caracter;
-//     }
-//     return tablaDeCodigos;
-// }
 
 std::unordered_map<std::string, char> Huffman::cargarTablaDeCodigos(std::ifstream& archivoEntrada) {
     std::unordered_map<std::string, char> tablaDeCodigos;
@@ -52,7 +38,7 @@ std::unordered_map<std::string, char> Huffman::cargarTablaDeCodigos(std::ifstrea
 
         // cout << "Codigo: " << codigo << " Caracter: " << caracter << endl;
 
-        if (caracter == '¿')
+        if (caracter == '-')
         {caracter = '\n';}
         // Almacenar en la tabla de códigos
         tablaDeCodigos[codigo] = caracter;
@@ -66,26 +52,6 @@ std::unordered_map<std::string, char> Huffman::cargarTablaDeCodigos(std::ifstrea
 }
 
 
-// std::unordered_map<char, std::string> Huffman::generarTablaDeCodigos(NodoHuffman* raiz, std::string codigo) {
-//     // char c = '\0'; // Default value
-//     // if (raiz) {
-//     //     c = raiz->caracter;
-//     //     cout << "Generando tabla de codigos: " << codigo << "-------------> " << c  << endl;
-//     // }else{
-
-//     //     cout << "Generando tabla de codigos: " << codigo   << endl;
-//     // }
-
-//     std::unordered_map<char, std::string> tablaDeCodigos;
-//     if (raiz) {
-//         if (!raiz->izquierda && !raiz->derecha) {
-//             tablaDeCodigos[raiz->caracter] = codigo;
-//         }
-//         tablaDeCodigos = generarTablaDeCodigos(raiz->izquierda, codigo + "0");
-//         tablaDeCodigos.insert(generarTablaDeCodigos(raiz->derecha, codigo + "1").begin(), tablaDeCodigos.end());
-//     }
-//     return tablaDeCodigos;
-// }
 std::unordered_map<char, std::string> Huffman::generarTablaDeCodigos(NodoHuffman* raiz, std::string codigo) {
     std::unordered_map<char, std::string> tablaDeCodigos;
     if (raiz) {
@@ -138,14 +104,28 @@ NodoHuffman* Huffman::construirArbolHuffman(std::unordered_map<char, int>& frecu
 }
 
 void Huffman::comprimirArchivo(const std::string& nombreArchivoEntrada, const std::string& nombreArchivoSalida) {
-    std::ifstream archivoEntrada(nombreArchivoEntrada, std::ios::in);
+    std::fstream archivoEntrada(nombreArchivoEntrada, ios::in| ios::out);
     std::ofstream archivoSalida(nombreArchivoSalida, std::ios::out | std::ios::binary);
+
+    // añadir un \n al final del archivo
+    archivoEntrada.seekg(-1, std::ios_base::end);
+    char lastChar;
+    archivoEntrada.get(lastChar);
+    if(lastChar != '\n'){
+        archivoEntrada.seekg(0, std::ios_base::end);
+        archivoEntrada.put('\n');
+    }
+
+    // volver al inicio
+    archivoEntrada.clear();
+    archivoEntrada.seekg(0);
+
 
     std::unordered_map<char, int> frecuencias;
     char caracter;
     while (archivoEntrada.get(caracter)) {
         if(caracter == '\n'){
-            caracter = '¿';
+            caracter = '-';
         }
         frecuencias[caracter]++;
         // std::cout << caracter;
@@ -176,10 +156,19 @@ void Huffman::comprimirArchivo(const std::string& nombreArchivoEntrada, const st
     while (archivoEntrada.get(caracter)) {
         // archivoSalida.put(tablaDeCodigos[caracter]);
         if(caracter == '\n'){
-            caracter = '¿';
+            caracter = '-';
         }
-        archivoSalida.write(tablaDeCodigos[caracter].c_str(), tablaDeCodigos[caracter].size());
-        archivoSalida.put(' ');
+        codigo += tablaDeCodigos[caracter];
+        // std::cout << caracter;
+
+        while (codigo.length() >= 8) {
+            std::string byte = codigo.substr(0, 8);
+            codigo = codigo.substr(8);
+            std::bitset<8> bits(byte);
+            archivoSalida.put(char(bits.to_ulong()));
+        }
+
+
     }
 
 
@@ -187,84 +176,63 @@ void Huffman::comprimirArchivo(const std::string& nombreArchivoEntrada, const st
     archivoSalida.close();
 }
 
-// void Huffman::descomprimirArchivo(const std::string& nombreArchivoEntrada, const std::string& nombreArchivoSalida) {
-//     std::ifstream archivoEntrada(nombreArchivoEntrada, std::ios::in | std::ios::binary);
-//     std::ofstream archivoSalida(nombreArchivoSalida, std::ios::out);
-
-//     std::unordered_map<std::string, char> tablaDeCodigos = cargarTablaDeCodigos(archivoEntrada);
-
-//     std::string codigo;
-//     char byte;
-//     while (archivoEntrada.get(byte)) {
-//         std::bitset<8> bits(byte);
-//         codigo += bits.to_string();
-//         for (size_t i = 0; i < codigo.length(); ++i) {
-//             std::string subcadena = codigo.substr(0, i + 1);
-//             if (tablaDeCodigos.find(subcadena) != tablaDeCodigos.end()) {
-//                 archivoSalida << tablaDeCodigos[subcadena];
-//                 codigo = codigo.substr(i + 1);
-//                 i = -1; // Reiniciar el índice
-//             }
-//         }
-//     }
-
-//     archivoEntrada.close();
-//     archivoSalida.close();
-// }
-
 void Huffman::descomprimirArchivo(const std::string& nombreArchivoEntrada, const std::string& nombreArchivoSalida) {
     std::ifstream archivoEntrada(nombreArchivoEntrada, std::ios::in | std::ios::binary);
     std::ofstream archivoSalida(nombreArchivoSalida, std::ios::out);
 
     std::unordered_map<std::string, char> tablaDeCodigos = cargarTablaDeCodigos(archivoEntrada);
-    
-    // imprimir tabla de codigos cargada
-    cout << "Tabla de codigos cargada: --------" << endl;
-    for (const auto par : tablaDeCodigos) {
-        cout << "Codigo: " << par.first << " ->" << par.second << endl;
-    }
+    // cout << "Tabla de codigos cargada" << endl;
+    // cout << "Testeando tabla de codigos" << endl;
+    // cout << unordered_map.find('a') << endl;
+    // std::cout << "Tabla de Códigos:" << std::endl;
+    // for (const auto par : tablaDeCodigos) {
+    //     cout << "Codigo: " << par.first << " ->" << par.second << endl;
+    // }
 
-    // imprime el valor de 0000101 que deberia ser i en el ejemplo
-    cout << "Valor de 0100: " << tablaDeCodigos["0100"] << endl;
+    cout << "Leyendo archivo comprimido" << endl;
+    std::string codigo;
+    char byte;
+    string str;
 
     archivoEntrada.clear();
     archivoEntrada.seekg(0); // Volver al inicio del archivo para recorrerlo de nuevo
 
-    char caracter;
-    while (archivoEntrada.get(caracter)) {
-        // cout << "CaracterA: " << caracter << endl;
-        if (caracter == '#') {
-            break; // Fin de la tabla de códigos
+    // añade a codigo el contenido del archivo despues del primer #
+    bool flag = false;
+    while (archivoEntrada.get(byte)) {
+        // cout << "Byte: " << byte << endl;
+        std::bitset<8> bits(byte);
+        string str = bits.to_string();
+        if(flag){
+            codigo += str;
+        }
+        if(byte == '#'){
+            flag = true;
+        }
+    }
+    
+    // cout << "Codigo: " << codigo << endl;
+    // cout << "Codigo size: " << codigo.size() << endl;
+
+    std::string codigoActual;
+    for (char bit : codigo) {
+        codigoActual += bit;
+        // cout << "Codigo actual: " << codigoActual << endl;
+        if (tablaDeCodigos.find(codigoActual) != tablaDeCodigos.end()) {
+            // cout << "Caracter encontrado: " << tablaDeCodigos[codigoActual] << endl;
+            if(tablaDeCodigos[codigoActual] == '-'){
+                tablaDeCodigos[codigoActual] = '\n';
+            }
+            archivoSalida.put(tablaDeCodigos[codigoActual]);
+            codigoActual.clear();
         }
     }
 
-    // obtenemos a partir de aqui strings de 0 y 1 
 
-    // cout << "Obteniendo string de 0 y 1" << endl;
-    std::string codigo;
-    // while (archivoEntrada.get(caracter)) {
-    //     // cout << "Caracter: " << caracter << endl;
-    //     if (caracter == ' ') {
-    //         // cout << "Codigo: " << codigo << endl;
-    //         cout << codigo<< " ";
-    //         codigo = "";
-    //     } else {
-    //         codigo += caracter;
-    //     }
-    // }
-    while (archivoEntrada.get(caracter)) {
-        // cout << "Caracter: " << caracter << endl;
-        if (caracter == ' ') {
-            // cout << "Codigo: " << codigo << endl;
-            cout << tablaDeCodigos[codigo] ;
 
-            archivoSalida.put(tablaDeCodigos[codigo]);
-            codigo = "";
-        } else {
-            codigo += caracter;
-        }
-    }
 
+    
+    
 
     archivoEntrada.close();
     archivoSalida.close();
