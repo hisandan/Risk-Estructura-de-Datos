@@ -20,7 +20,7 @@ class Tablero {
 public:
     std::vector<Jugador> jugadores;
     std::vector<Pais> paises;
-    int turnoActual = 0;
+    int turnoActual = 0; 
 
     Tablero() {}
     Tablero(std::vector<Jugador> jugadores, std::vector<Pais> paises) : jugadores(jugadores), paises(paises) {}

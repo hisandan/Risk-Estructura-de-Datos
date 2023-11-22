@@ -103,12 +103,6 @@ int main() {
             tablero.guardar_json(filename);
             // Save(filename);
             ayuda();
-        } else if (cmd == "cargar") {
-            std::string filename;
-            iss >> filename;
-            Load(filename);
-            ayuda();
-
         } else if (cmd == "guardar_comprimido") {
             std::string filename;
             iss >> filename;
@@ -127,6 +121,9 @@ int main() {
             huffman.descomprimirArchivo(filename, filename_json);
             tablero.cargar_json(filename_json);
             remove(filename_json.c_str());
+
+            // imprime el turno actual
+            cout << "Turno actual: " << tablero.turnoActual << endl;
             
             ayuda();
         }  else if (cmd == "salir") {
@@ -152,35 +149,35 @@ void ayuda() {
          << "| inicializar              | Realiza las operaciones necesarias para          |\n"
          << "|                          | inicializar el juego.                            |\n"
          << "+--------------------------+--------------------------------------------------+\n"
+         << "| inicializar <archivo>.json | Inicializa el juego con los datos contenidos   |\n"
+         << "|                          | en el archivo identificado por <nombre_archivo>. |\n"
+         << "|                          | Por ejemplo, si se desea leer el archivo         |\n"
+         << "|                          | denominado 'juego' para continuar con la         |\n"
+         << "|                          | partida guardada, se debe digitar:               |\n"
+         << "|                          | inicializar juego.                               |\n"
+         << "+--------------------------+--------------------------------------------------+\n"
          << "| turno <id_jugador>       | Realiza las operaciones descritas dentro del     |\n"
          << "|                          | turno de un jugador. Por ejemplo, si se desea    |\n"
          << "|                          | acceder al turno del jugador 5, se debe digitar  |\n"
          << "|                          | el comando de esta manera: turno 5.              |\n"
          << "+--------------------------+--------------------------------------------------+\n"
-         << "| guardar <nombre_archivo> | Guarda el estado actual del juego en un archivo  |\n"
+         << "| guardar <archivo>.json   | Guarda el estado actual del juego en un archivo  |\n"
          << "|                          | de texto. Por ejemplo, si se desea guardar la    |\n"
          << "|                          | partida bajo el nombre de 'juego', se debe       |\n"
          << "|                          | digitar el comando de esta manera:               |\n"
          << "|                          | guardar juego.                                   |\n"
          << "+--------------------------+--------------------------------------------------+\n"
          << "| guardar_comprimido       | Guarda el estado actual del juego en un archivo  |\n"
-         << "| <nombre_archivo>         | binario comprimido. Por ejemplo, si se desea     |\n"
+         << "| <nombre_archivo>.bin     | binario comprimido. Por ejemplo, si se desea     |\n"
          << "|                          | guardar la partida bajo el nombre de 'juego',    |\n"
          << "|                          | se debe digitar el comando de esta manera:       |\n"
          << "|                          | guardar_comprimido juego.                        |\n"
          << "+--------------------------+--------------------------------------------------+\n"
-         << "| cargar_comprimido       | Guarda el estado actual del juego en un archivo  |\n"
-         << "| <nombre_archivo>         | binario comprimido. Por ejemplo, si se desea     |\n"
+         << "| cargar_comprimido        | Guarda el estado actual del juego en un archivo  |\n"
+         << "| <nombre_archivo>.bin     | binario comprimido. Por ejemplo, si se desea     |\n"
          << "|                          | guardar la partida bajo el nombre de 'juego',    |\n"
          << "|                          | se debe digitar el comando de esta manera:       |\n"
          << "|                          | guardar_comprimido juego.                        |\n"
-         << "+--------------------------+--------------------------------------------------+\n"
-         << "| inicializar <nombre_archivo> | Inicializa el juego con los datos contenidos |\n"
-         << "|                          | en el archivo identificado por <nombre_archivo>. |\n"
-         << "|                          | Por ejemplo, si se desea leer el archivo         |\n"
-         << "|                          | denominado 'juego' para continuar con la         |\n"
-         << "|                          | partida guardada, se debe digitar:               |\n"
-         << "|                          | inicializar juego.                               |\n"
          << "+--------------------------+--------------------------------------------------+\n"
         //  << "| costo_conquista <territorio> | Calcula el costo y la secuencia de           |\n"
         //  << "|                          | territorios a ser conquistados para lograr       |\n"

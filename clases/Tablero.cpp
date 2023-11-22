@@ -53,7 +53,7 @@ void Tablero::siguenteturno() {
     if (turnoActual == jugadores.size()) {
         turnoActual = 0;
     }
-}
+} 
 
 void Tablero::consultaPais(string pais_name) {
     bool encontrado = false;
