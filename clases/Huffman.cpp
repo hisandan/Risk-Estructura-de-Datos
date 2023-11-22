@@ -107,18 +107,18 @@ void Huffman::comprimirArchivo(const std::string& nombreArchivoEntrada, const st
     std::fstream archivoEntrada(nombreArchivoEntrada, ios::in| ios::out);
     std::ofstream archivoSalida(nombreArchivoSalida, std::ios::out | std::ios::binary);
 
-    // añadir un \n al final del archivo
-    archivoEntrada.seekg(-1, std::ios_base::end);
-    char lastChar;
-    archivoEntrada.get(lastChar);
-    if(lastChar != '\n'){
-        archivoEntrada.seekg(0, std::ios_base::end);
-        archivoEntrada.put('\n');
-    }
+    // // añadir un \n al final del archivo
+    // archivoEntrada.seekg(-1, std::ios_base::end);
+    // char lastChar;
+    // archivoEntrada.get(lastChar);
+    // if(lastChar != '\n'){
+    //     archivoEntrada.seekg(0, std::ios_base::end);
+    //     archivoEntrada.put('\n\n\n');
+    // }
 
-    // volver al inicio
-    archivoEntrada.clear();
-    archivoEntrada.seekg(0);
+    // // volver al inicio
+    // archivoEntrada.clear();
+    // archivoEntrada.seekg(0);
 
 
     std::unordered_map<char, int> frecuencias;

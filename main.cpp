@@ -8,6 +8,8 @@
 #include "clases/Tablero.h"
 #include "clases/Huffman.h"
 
+#define _POSIX_SOURCE
+#include <unistd.h>
 // for random seed and random number generation
 #include <ctime>
 #include <cstdlib>
@@ -85,6 +87,12 @@ int main() {
             iss >> filename;
             if (!filename.empty())
             {
+                // verifica que arhivo exista
+                if (access(filename.c_str(), F_OK) == -1) {
+                    std::cout << "El archivo " << filename << " no existe." << std::endl;
+                    continue;
+                }
+
                 tablero.cargar_json(filename);
             } else{
                 InitializeGame();
@@ -108,6 +116,8 @@ int main() {
             iss >> filename;
             
             string filename_json = "temp.json";
+  
+
             // realiza tablero.guardar_json(filename_json); y luego sobre ese archivo realiza huffman.comprimirArchivo(archivoEntrada, filename); y por último elimina el archivo json
             tablero.guardar_json(filename_json);
             huffman.comprimirArchivo(filename_json, filename);
@@ -117,8 +127,20 @@ int main() {
         } else if (cmd == "cargar_comprimido") {
             std::string filename;
             iss >> filename;
+            // verifica que el archivo exista
+            if (access(filename.c_str(), F_OK) == -1) {
+                std::cout << "El archivo " << filename << " no existe." << std::endl;
+                continue;
+            }
             string filename_json = "temp.json";
             huffman.descomprimirArchivo(filename, filename_json);
+
+            // añade un '}' al final del archivo para que sea un json válido
+            std::ofstream outfile;
+            outfile.open(filename_json, std::ios_base::app);
+            outfile << "}";
+            outfile.close();
+            
             tablero.cargar_json(filename_json);
             remove(filename_json.c_str());
 
